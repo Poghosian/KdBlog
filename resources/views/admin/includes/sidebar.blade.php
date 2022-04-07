@@ -2,8 +2,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src={{asset("dist/img/AdminLTELogo.png")}} alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <img src={{asset("dist/img/Layer_x0020_1.png")}} alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">KRADAN</span>
     </a>
 
     <!-- Sidebar -->
@@ -22,6 +22,14 @@
                     <i class="nav-icon far fa-image"></i>
                     <p>
                         Category
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('admin.post.index')}}" class="nav-link">
+                    <i class="nav-icon far fa-image"></i>
+                    <p>
+                        Post
                     </p>
                 </a>
             </li>

@@ -22,6 +22,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
         Route::get('/', 'IndexController');
     });
 
+    Route::group(['namespace' => 'Post', 'prefix' => 'post'], function () {
+        Route::get('/', 'IndexController')->name('admin.post.index');
+        Route::get('/create', 'CreateController')->name('admin.post.create');
+        Route::post('/', 'StoreController')->name('admin.post.store');
+        Route::get('/{post}', 'ShowController')->name('admin.post.show');
+        Route::get('/{post}/edit', 'EditController')->name('admin.post.edit');
+        Route::patch('/{post}', 'UpdateController')->name('admin.post.update');
+        Route::delete('/{post}', 'DestroyController')->name('admin.post.destroy');
+    });
+
     Route::group(['namespace' => 'Portfolio', 'prefix' => 'portfolio'], function () {
         Route::get('/', 'IndexController')->name('admin.portfolio.index');
         Route::get('/create', 'CreateController')->name('admin.portfolio.create');

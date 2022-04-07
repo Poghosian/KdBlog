@@ -7,16 +7,17 @@ use App\Http\Requests\Admin\Portfolio\UpdateRequest;
 use App\Models\Category;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class UpdateController extends Controller
 {
     public function __invoke(UpdateRequest $request, Portfolio $portfolio)
     {
-
         $data = $request->validated();
         if (!empty($data['image'])){
             $data['image'] = basename(Storage::put('/public/images', $data['image']));
+            File::delete('storage/images/'.$portfolio->image);
         }
         $portfolio->update($data);
 

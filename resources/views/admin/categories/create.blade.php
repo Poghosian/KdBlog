@@ -31,12 +31,18 @@
                     <form action="{{route('admin.category.store')}}" method="POST" class="w-25" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <input type="text" class="form-control" name="title" placeholder="Name of category">
+                            @error('title')
+                            <div class="text-danger">This field is required</div>
+                            @enderror
+                            <input type="text" value="{{old('title') ?? null}}" class="form-control mb-4" name="title" placeholder="Name of category">
+
+                            @error('image')
+                            <div class="text-danger">This field is required</div>
+                            @enderror
                             <div class="form-group">
-                                <label for="exampleInputFile">File input</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="image">
+                                        <input type="file"  class="custom-file-input" name="image">
                                         <label class="custom-file-label" >Choose file</label>
                                     </div>
                                     <div class="input-group-append">
@@ -44,10 +50,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            @error('title')
-                            <div class="text-danger">This field is required</div>
-                            @enderror
                         </div>
                         <input type="submit" class="btn btn-primary" value="Add">
                     </form>

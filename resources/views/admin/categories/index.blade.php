@@ -21,6 +21,7 @@
         </div>
         <!-- /.content-header -->
 
+{{--        @dd($errors)--}}
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -32,16 +33,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
+                            <div class="card-header">
+                                <h3 class="card-title">Categories Table</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-bordered">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Title</th>
-                                        <th>Images</th>
-                                        <th colspan="3">Show</th>
+                                        <th>image</th>
+                                        <th>Show</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -49,17 +56,20 @@
                                         <tr>
                                             <td>{{ $category->id}}</td>
                                             <td>{{ $category->title}}</td>
-                                            <td><img style="width: 100px;" src="{{asset('storage/images/'.$category->image)}}"></td>
-                                            <td><a href="{{route('admin.category.show', $category->id)}}"><i
-                                                        class="fas fa-eye"></i></a></td>
-                                            <td><a href="{{route('admin.category.edit', $category->id)}}"
+                                            <td>
+                                                <img style="width: 100px;" src="{{$category->image ? asset('storage/images/'. $category->image) : asset('kd-images/no-image.webp')}}">
+                                            </td>
+                                            <td><a class="btn btn-primary" href="{{route('admin.category.show', $category->id)}}"><i
+                                                        class="fas fa-eye"></i></a>
+                                            </td>
+                                            <td><a class="btn btn-primary" href="{{route('admin.category.edit', $category->id)}}"
                                                    class="text-success"><i class="fas fa-pen"></i></a></td>
                                             <td>
-                                                <form action="{{route('admin.category.destroy', $category->id)}}" method="POST">
+                                                <form class="sh_form" action="{{route('admin.category.destroy', $category->id)}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="border-0 bg-transparent">
-                                                        <i class="fas fa-trash text-danger" role="button"></i>
+                                                    <button type="submit" class="btn btn-danger delete-modal">
+                                                        <i class="fas fa-trash " role="button"></i>
                                                     </button>
                                                 </form>
                                             </td>
@@ -69,6 +79,9 @@
                                 </table>
                             </div>
                             <!-- /.card-body -->
+                            <div class="card-footer clearfix">
+                                {{$categories->links()}}
+                            </div>
                         </div>
                     </div>
                 </div>

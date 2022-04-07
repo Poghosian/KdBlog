@@ -11,11 +11,11 @@ use Illuminate\Support\Str;
 
 class StoreController extends Controller
 {
-    public function __invoke(StoreRequest $request)
+    public function __invoke(StoreRequest $request): \Illuminate\Http\RedirectResponse
     {
         $data = $request->validated();
         $data['image'] = basename(Storage::put('/public/images', $data['image']));
-        Category::firstOrCreate($data);
+        Category::query()->create($data);
 
         return redirect()->route('admin.category.index');
     }

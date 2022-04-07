@@ -33,8 +33,10 @@
                         @method('PATCH')
                         <div class="form-group">
                             <input value="{{$portfolio->title}}" type="text" class="form-control mb-2" name="title" placeholder="Name of portfolio">
-                            <input value="{{$portfolio->content}}" type="text" class="form-control mb-2" name="content" placeholder="Name of portfolio">
-                            <img style="width: 100px;" src="{{asset('storage/images/'.$portfolio->image)}}">
+                            @error('title')
+                                <div class="text-danger">{{ $errors->first('title') }}</div>
+                            @enderror
+                            <img style="width: 200px;"  src="{{$portfolio->image ? asset('storage/images/'. $portfolio->image) : asset('kd-images/no-image.webp')}}">
                             <div class="form-group">
                                 <label for="exampleInputFile">File input</label>
                                 <div class="input-group">
@@ -47,16 +49,19 @@
                                     </div>
                                 </div>
                             </div>
-                            @error('title')
-                            <div class="text-danger">This field is required</div>
+                            @error('image')
+                            @foreach($errors->get('image') as $error)
+                                     <div class="text-danger">{{ $error }}</div>
+                                @endforeach
                             @enderror
                         </div>
                         <select type="text" class="form-control mb-2" name="category_id">
-{{--                            <option value="{{$portfolio->category->id}}">{{$portfolio->category->title}}</option>--}}
+
+                            <option value="">Select Category</option>
                             @foreach($category as $cat)
                                 <option  {{$cat->id == $portfolio->category_id ? 'selected' : null}} value="{{$cat->id}}">{{$cat->title}}</option>
                             @endforeach
-                            <option value="">Select Category</option>
+
                         </select>
                         <input type="submit" class="btn btn-primary" value="Update">
                     </form>

@@ -32,23 +32,21 @@
                         @csrf
                         @method('PATCH')
                         <div class="form-group">
-                            <input value="{{$category->title}}" type="text" class="form-control" name="title" placeholder="Name of category">
                             @error('title')
                             <div class="text-danger">This field is required</div>
                             @enderror
-                            <img style="width: 100px;" src="{{asset('storage/images/' . $category->image)}}">
+                            <input value="{{$category->title}}" type="text" class="form-control mb-4" name="title" placeholder="Name of category">
+
+                            <img style="width: 200px;" class="mb-4" src="{{asset('storage/images/' . $category->image)}}">
                             <div class="form-group">
-                                <label for="exampleInputFile">File input</label>
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" name="image">
                                         <label class="custom-file-label" >Choose file</label>
                                     </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Upload</span>
-                                    </div>
                                 </div>
                             </div>
+
                         </div>
                         <input type="submit" class="btn btn-primary" value="Update">
                     </form>

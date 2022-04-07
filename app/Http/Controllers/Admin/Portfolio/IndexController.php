@@ -11,7 +11,7 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $portfolios = Portfolio::with('category')->get();
+        $portfolios = Portfolio::with('category')->latest('created_at')->paginate(4);
 
         return view('admin.portfolio.index', compact('portfolios'));
     }

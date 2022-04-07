@@ -10,8 +10,8 @@ class CreateController extends Controller
 {
     public function __invoke()
     {
-        $category_names = Category::all();
+        $category = Category::all();
 
-        return view('admin.portfolio.create', compact('category_names'));
+        return view('admin.portfolio.create', compact('category'));
     }
 }

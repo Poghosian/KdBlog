@@ -28,29 +28,24 @@
                 <div class="row">
                     <div class="col-12">
                     </div>
-                    <form action="{{route('admin.portfolio.store')}}" method="POST" class="w-25" enctype="multipart/form-data">
+                    <form action="{{route('admin.portfolio.store')}}" method="POST" class="w-50" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <input type="text" value="{{old('title') ?? null}}" class="form-control mb-2" name="title" placeholder="Name of portfolio">
+                            <input type="text" value="{{old('title') ?? null}}" class="form-control mb-3" name="title" placeholder="Name of portfolio">
                             @error('title')
                             <div class="text-danger">This field is required</div>
                             @enderror
-                            <textarea type="text" class="form-control mb-2" name="content" placeholder="Name of content"></textarea>
                             <div class="form-group">
-                                <label for="exampleInputFile">File input</label>
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" name="image">
                                         <label class="custom-file-label" >Choose file</label>
                                     </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Upload</span>
-                                    </div>
                                 </div>
                             </div>
                             <select type="text" class="form-control mb-2" name="category_id">
                                 <option value="">Select Category</option>
-                                @foreach($category_names as $cat)
+                                @foreach($category as $cat)
                                     <option value="{{$cat->id}}">{{$cat->title}}</option>
                                 @endforeach
                             </select>

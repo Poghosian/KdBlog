@@ -16,7 +16,10 @@ class StoreController extends Controller
     {
 
         $data = $request->validated();
-        $data['image'] = basename(Storage::put('/public/images', $data['image']));
+        if (!empty($data['image'])){
+            $data['image'] = basename(Storage::put('/public/images', $data['image']));
+        }
+
         Portfolio::firstOrCreate($data);
 
         return redirect()->route('admin.portfolio.index');

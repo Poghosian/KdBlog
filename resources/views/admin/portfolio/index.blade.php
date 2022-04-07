@@ -32,38 +32,54 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
+
                         <div class="card">
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
+                            <div class="card-header">
+                                <h3 class="card-title">Portfolios Table</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-bordered">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Title</th>
-                                        <th>description</th>
                                         <th>image</th>
                                         <th>category</th>
-                                        <th colspan="3">Show</th>
+                                        <th>Show</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($portfolios as $portfolio)
                                         <tr>
                                             <td>{{ $portfolio->id}}</td>
-                                            <td>{{ $portfolio->title}}</td>
-                                            <td>{{ $portfolio->content}}</td>
-                                            <td><img style="width: 100px;" src="{{asset('storage/images/'.$portfolio->image)}}"></td>
-                                            <td><a href="{{route('admin.category.show', $portfolio->category->id)}}">{{ $portfolio->category->title}}</a></td>
-                                            <td><a href="{{route('admin.portfolio.show', $portfolio->id)}}"><i
-                                                        class="fas fa-eye"></i></a></td>
-                                            <td><a href="{{route('admin.portfolio.edit', $portfolio->id)}}"
+                                            <td>
+                                                <div style="max-width: 400px; max-height: 100px; overflow-y: scroll; margin: 0 auto;">
+                                                    {{ $portfolio->title}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                    <img style="width: 100px; height: 100px; object-fit: cover;" src="{{$portfolio->image ? asset('storage/images/'. $portfolio->image) : asset('kd-images/no-image.webp')}}">
+                                            </td>
+                                            <td>
+                                                <a href="{{!empty($portfolio->category->id) ?  route('admin.category.show', $portfolio->category->id) : 'javascript:void(0)'}}">
+                                                    {{ !empty($portfolio->category->title) ? $portfolio->category->title : 'no category'}}
+                                                </a>
+                                            </td>
+                                            <td><a class="btn btn-primary" href="{{route('admin.portfolio.show', $portfolio->id)}}"><i
+                                                        class="fas fa-eye"></i></a>
+                                            </td>
+                                            <td><a class="btn btn-primary" href="{{route('admin.portfolio.edit', $portfolio->id)}}"
                                                    class="text-success"><i class="fas fa-pen"></i></a></td>
                                             <td>
                                                 <form action="{{route('admin.portfolio.destroy', $portfolio->id)}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="border-0 bg-transparent">
-                                                        <i class="fas fa-trash text-danger" role="button"></i>
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="fas fa-trash " role="button"></i>
                                                     </button>
                                                 </form>
                                             </td>
@@ -73,7 +89,11 @@
                                 </table>
                             </div>
                             <!-- /.card-body -->
+                            <div class="card-footer clearfix">
+                                {{$portfolios->links()}}
+                            </div>
                         </div>
+
                     </div>
                 </div>
                 <!-- /.row -->

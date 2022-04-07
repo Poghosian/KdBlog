@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Category\UpdateRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class UpdateController extends Controller
@@ -17,10 +18,10 @@ class UpdateController extends Controller
 
         if (!empty($data['image'])){
             $data['image'] = basename(Storage::put('/public/images', $data['image']));
+            File::delete('storage/images/'.$category->image);
         }
 
         $category->update($data);
-
         return redirect()->route('admin.category.show', compact('category'));
     }
 }

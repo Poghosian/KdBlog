@@ -1,0 +1,33 @@
+.md-flex{
+    display: flex;
+}
+.card-body td, th{
+    text-align: center !important;
+}
+.card-body td{
+    vertical-align: middle !important;
+}
+.custom-file-label::after{
+    display: none !important;
+}
+/*.card a, button{*/
+/*    padding: 10px;*/
+/*    background-color: transparent !important;*/
+/*    border: 0.5px solid !important;*/
+/*    border-radius: 5px !important;*/
+/*}*/
+table ::-webkit-scrollbar {
+    background: skyblue;
+    width: 2px;
+    display: none;
+}
+table ::-webkit-scrollbar-thumb{
+    display: block;
+    background: linear-gradient(180deg, #000000, #fff);
+    border-radius: 3px;
+}
+table ::-webkit-scrollbar-track {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    background-color: #f9f9fd;
+    border-radius: 10px;
+}
